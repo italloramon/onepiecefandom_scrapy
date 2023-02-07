@@ -9,9 +9,10 @@ class OnepiecefandomScrapyPipeline:
         username = 'postgres'
         password = 'postgres' # your password
         database = 'onepiecewiki'
+        postgres_port = 5432
 
         ## Create/Connect to database
-        self.connection = psycopg2.connect(host=hostname, user=username, password=password, dbname=database)
+        self.connection = psycopg2.connect(host=hostname, user=username, password=password, dbname=database, port=postgres_port)
         
         ## Create cursor, used to execute commands
         self.cur = self.connection.cursor()

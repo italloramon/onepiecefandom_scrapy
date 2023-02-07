@@ -33,6 +33,10 @@ class OpSpider(scrapy.Spider):
                 char_item['year'] = row.xpath('td[5]//text()').extract_first()
                 char_item['note'] = note
 
+                char_item['chapter'] = self.correct_numbers(char_item['chapter'])
+                char_item['episode'] = self.correct_numbers(char_item['episode'])
+                char_item['year'] = self.correct_numbers(char_item['year'])
+
                 yield char_item
     
     def correct_notes(self, notes = ['\n']):
@@ -45,3 +49,10 @@ class OpSpider(scrapy.Spider):
                 if s != '\n':
                     notecorrect += s
             return notecorrect
+    
+    def correct_numbers(self, str):
+        try:
+            a = int(str)
+        except:
+            a = 0
+        return a
